@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 
 function GameMap () {
     const X = {walk: false, action: false,};
@@ -8,8 +8,8 @@ function GameMap () {
 
     const FIELD_MAP = [
     // X:0  1  2  3  4  5  6  7  8
-        [O, O, O, X, X, X, X, X, X], // y = 0
-        [X, O, O, O, O, O, O, O, X], // y = 1
+        [O, O, O, O, O, O, O, O, O], // y = 0
+        [O, O, O, O, O, O, O, O, X], // y = 1
         [X, O, O, O, O, O, O, O, X], // y = 2
         [X, O, O, O, O, O, O, O, X], // y = 3
         [X, O, O, O, AX, O, O, O, X], // y = 4
@@ -51,8 +51,16 @@ function GameMap () {
             break;
         
         case 'ArrowLeft':
-            newPosition = playerPosition.left - 32; 
-            X = ((playerPosition.left - 32) - ((playerPosition.left - 32) % 32)) / 32;
+            // newPosition = playerPosition.left - 32; 
+            // X = ((playerPosition.left - 32) - ((playerPosition.left - 32) % 32)) / 32;
+            // Y = (playerPosition.top - (playerPosition.top % 32)) / 32;
+
+            // if (FIELD_MAP[Y][X].walk) {
+            //     setPlayerPosition((prevPosition) => ({...prevPosition, left: newPosition}));
+            // }
+            // break;
+             newPosition = playerPosition.left - 32;
+            X = (newPosition - (newPosition % 32)) / 32;
             Y = (playerPosition.top - (playerPosition.top % 32)) / 32;
 
             if (FIELD_MAP[Y][X].walk) {
@@ -61,22 +69,30 @@ function GameMap () {
             break;
 
         case 'ArrowRight':
-            newPosition = playerPosition.left + 32; 
-            X = ((playerPosition.left + 32) - ((playerPosition.left + 32) % 32)) / 32;
+            // newPosition = playerPosition.left + 32; 
+            // X = ((playerPosition.left + 32) - ((playerPosition.left + 32) % 32)) / 32;
+            // Y = (playerPosition.top - (playerPosition.top % 32)) / 32;
+
+            // if (FIELD_MAP[Y][X].walk) {
+            //     setPlayerPosition((prevPosition) => ({...prevPosition, left: newPosition}));
+            // }
+            // break;
+            newPosition = playerPosition.left + 32;
+               X = (newPosition - (newPosition % 32)) / 32;
             Y = (playerPosition.top - (playerPosition.top % 32)) / 32;
 
             if (FIELD_MAP[Y][X].walk) {
                 setPlayerPosition((prevPosition) => ({...prevPosition, left: newPosition}));
             }
             break;
-
+            
         default:
             break;
     }
 
     };
 
-    React.useEffect(
+   useEffect(
         () => {
             window.addEventListener('keydown', handleKeyPress);
             return () => {
