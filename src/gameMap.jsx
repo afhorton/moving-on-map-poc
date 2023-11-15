@@ -8,19 +8,19 @@ function GameMap () {
 
     const FIELD_MAP = [
     // X:0  1  2  3  4  5  6  7  8
-        [O, O, O, O, O, O, O, O, O], // y = 0
-        [O, O, O, O, O, O, O, O, X], // y = 1
+        [X, X, X, X, X, X, X, X, X], // y = 0
+        [X, O, O, O, O, O, O, O, X], // y = 1
         [X, O, O, O, O, O, O, O, X], // y = 2
         [X, O, O, O, O, O, O, O, X], // y = 3
-        [X, O, O, O, AX, O, O, O, X], // y = 4
+        [X, O, O, O, O, O, O, O, X], // y = 4
         [X, O, O, O, O, O, O, O, X], // y = 5
-        [X, O, O, O, AO, AO, O, O, X], // y = 6 
-        [X, O, O, O, AO, AO, O, O, X], // y = 7
+        [X, O, O, O, O, O, O, O, X], // y = 6 
+        [X, O, O, O, O, O, O, O, X], // y = 7
         [X, X, X, X, X, X, X, X, X], // y = 8
     ]
 
     // useState for the player's current position
-    const [playerPosition, setPlayerPosition] = useState({top: 32, left: 32}); 
+    const [playerPosition, setPlayerPosition] = useState({top: 4*32, left: 4*32}); 
 
     // handle keypress events for player movement
     const handleKeyPress = (event) => {
@@ -31,7 +31,7 @@ function GameMap () {
 
     switch (event.key) {
         case 'ArrowUp':
-            newPosition = playerPosition.top - 32;
+            newPosition = playerPosition.top - 2;
             X = (playerPosition.left - (playerPosition.left % 32)) / 32;
             Y = (newPosition - (newPosition % 32)) / 32;
 
@@ -41,7 +41,7 @@ function GameMap () {
             break;
 
         case 'ArrowDown':
-            newPosition = playerPosition.top + 32;
+            newPosition = playerPosition.top + 2;
             X = (playerPosition.left - (playerPosition.left % 32)) / 32;
             Y = (newPosition - (newPosition % 32)) / 32;
 
@@ -59,7 +59,7 @@ function GameMap () {
             //     setPlayerPosition((prevPosition) => ({...prevPosition, left: newPosition}));
             // }
             // break;
-             newPosition = playerPosition.left - 32;
+             newPosition = playerPosition.left - 2;
             X = (newPosition - (newPosition % 32)) / 32;
             Y = (playerPosition.top - (playerPosition.top % 32)) / 32;
 
@@ -77,7 +77,7 @@ function GameMap () {
             //     setPlayerPosition((prevPosition) => ({...prevPosition, left: newPosition}));
             // }
             // break;
-            newPosition = playerPosition.left + 32;
+            newPosition = playerPosition.left + 2;
                X = (newPosition - (newPosition % 32)) / 32;
             Y = (playerPosition.top - (playerPosition.top % 32)) / 32;
 
@@ -102,7 +102,11 @@ function GameMap () {
     );
 
     return (
-        <div>
+        <div style={{
+            position: 'relative',
+           
+            }}
+     >
             {FIELD_MAP.map(
                 (row, rowIndex) =>
                 (
